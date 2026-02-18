@@ -134,6 +134,10 @@ async function sendDiscordNotification(notice: Notice) {
   };
 
   try {
+    if (!DISCORD_WEBHOOK_URL) {
+      console.error("❌ DISCORD_WEBHOOK_URL이 설정되지 않았습니다.");
+      return;
+    }
     await axios.post(DISCORD_WEBHOOK_URL!, payload);
     console.log("✅ 디스코드 알림 전송 완료:", notice.id);
   } catch (error) {
