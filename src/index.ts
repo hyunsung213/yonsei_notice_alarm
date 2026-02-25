@@ -198,13 +198,8 @@ async function main() {
     notice.importance = analysis.importance;
     notice.summary = analysis.summary;
 
-    // 중요도가 1점(전혀 무관)인 공지는 알림을 생략하거나 로그만 남김
-    if (notice.importance && notice.importance <= 1) {
-      console.log(`⏩ 스킵: 유저와 무관한 공지로 판단됨 (ID: ${notice.id})`);
-    } else {
-      await sendDiscordNotification(notice);
-      console.log(`✅ 알림 전송 완료: ${notice.id}`);
-    }
+    await sendDiscordNotification(notice);
+    console.log(`✅ 알림 전송 완료: ${notice.id}`);
 
     await sleep(3000); // 봇 차단 방지 대기
   }
