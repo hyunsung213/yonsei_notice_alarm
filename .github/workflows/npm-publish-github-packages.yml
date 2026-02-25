@@ -5,32 +5,33 @@ name: Yonsei Notice Alarm
 
 on:
   schedule:
-    - cron: '0,30 * * * *'
+    - cron: "0,30 * * * *"
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          
+          node-version: "20"
+          cache: "npm"
+
       - name: Install Dependencies
         run: npm install
-        
+
       - name: Run Yonsei Notice Alarm
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: npx ts-node src/index.ts
 
       - name: Commit & Push lastId changes

@@ -35,7 +35,7 @@ function getUserProfile() {
 
 // 2. LLM을 활용한 중요도 판단 및 요약
 async function analyzeNoticeWithLLM(notice: Notice, userProfile: any) {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   const prompt = `
     당신은 대학생을 위한 스마트 공지 알우미입니다. 
